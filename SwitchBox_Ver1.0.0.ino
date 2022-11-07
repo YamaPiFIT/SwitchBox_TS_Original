@@ -142,9 +142,11 @@ void loop() {
   readMatrix(0);
 
   // ロータリエンコーダ読み取り
+  /*
   for (byte no = 0; no < ROTARY_ENCODER_COUNT; no++) {
     readRotaryEncoder(no);
   }
+  */
 
 }
 
@@ -155,6 +157,7 @@ void loop() {
 void readSwitch(byte no) {
   int state = digitalRead(switchPins[no]);
 
+  /*
   // ONになった時 1(HIGH) -> 0(LOW)
   if (switchLastState[no] - state == 1) {
     outPut(swOnOutPut[no]);
@@ -163,6 +166,7 @@ void readSwitch(byte no) {
   if (switchLastState[no] - state == -1) {
     outPut(swOffOutPut[no]);
   }
+  */
 
   switchLastState[no] = state;
 }
@@ -192,6 +196,7 @@ void readMatrix(int init) {
 
   // マトリクススイッチの状態を全て取得できたら出力する
   if (targetRowNum == ROWS) {
+    /*
     if (init == 0) {
       for (byte rowNum = 0; rowNum < ROWS; rowNum++) {
         for (byte colNum = 0; colNum < COLS; colNum++) {
@@ -206,6 +211,7 @@ void readMatrix(int init) {
         }
       }
     }
+    */
 
     // LastStateを保存
     for (byte rowNum = 0; rowNum < ROWS; rowNum++) {
@@ -219,6 +225,7 @@ void readMatrix(int init) {
 
     // デバッグ出力
     if (debug) {
+      //Serial.println(SWITCH_COUNT);
       for (int rowNum = 0; rowNum < ROWS; rowNum++) {
         for (int colNum = 0; colNum < COLS; colNum++) {
           Serial.print(matrixState[rowNum][colNum]);
