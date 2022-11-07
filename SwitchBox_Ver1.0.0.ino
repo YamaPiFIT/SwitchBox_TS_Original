@@ -14,7 +14,7 @@
 #include "SwitchSetting.h"
 #include "OutPutSetting.h"
 
-const boolean debug = false;          // デバッグ用フラグ
+const boolean debug = true;          // デバッグ用フラグ
 
 /*
 Joystick_ joystick1 = Joystick_(      // ジョイスティック1設定
@@ -133,6 +133,8 @@ void setup() {
 */
 void loop() {
 
+  Serial.println("--------------LOG START--------------");
+
   // スイッチ読み取り
   for (byte no = 0; no < SWITCH_COUNT; no++) {
     readSwitch(no);
@@ -147,6 +149,9 @@ void loop() {
     readRotaryEncoder(no);
   }
   */
+
+    Serial.println("--------------LOG END--------------");
+    Serial.println();
 
 }
 
