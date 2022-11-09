@@ -1,6 +1,7 @@
 
 const boolean debug = true;// デバッグ用フラグ
-const int switchPin = 0;//タクトスイッチを接続するピン
+const int switchPinOne = 0;//タクトスイッチを接続するピン
+const int switvhPinTow = 10;
 
 
 
@@ -21,6 +22,8 @@ void setup() {
   initialize();
   sendStartMessage("Initialize End");
 
+
+  sendStartMessage("Loop Method Strat");
 }
 
 /*
@@ -28,15 +31,19 @@ void setup() {
 */
 void initialize(){
   //デジタル0番ピンを入力用として設定
-  pinMode(switchPin, INPUT);
+  pinMode(switchPinOne, INPUT);
+  pinMode(switvhPinTow,OUTPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  boolean input;
+  boolean inputOne;
+  boolean outputOne;
 
-  input = digitalRead(switchPin);//0番ピン(スイッチ)の入力状態をinputに代入
-  Serial.println(input);//「input」を送信、改行
+  inputOne = digitalRead(switchPinOne);//スイッチの入力状態をinputに代入
+  outputOne = digitalRead(switvhPinTow);
+  Serial.println("input pin status : " + String(inputOne));//「input」を送信、改行
+  Serial.println("output pin status : " + String(outputOne));
   delay(1000);//1000msec待機(1秒待機)
 }
 
