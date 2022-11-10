@@ -1,6 +1,10 @@
 
 const boolean debug = true;// デバッグ用フラグ
-const int switchPinOne = 0;//タクトスイッチを接続するピン
+
+/*
+ ピンの番号を設定
+*/
+const int switchPinOne = 0;
 const int switvhPinTow = 10;
 
 
@@ -9,7 +13,7 @@ void setup() {
   // put your setup code here, to run once:
 
   // シリアル開始（デバックの場合）
-  if (debug) {
+  if (debug == true) {
     Serial.begin(9600);
   }
 
@@ -30,20 +34,24 @@ void setup() {
     初期化
 */
 void initialize(){
-  //デジタル0番ピンを入力用として設定
+  
+  /*
+    ピンが受信か送信かを設定
+  */
   pinMode(switchPinOne, INPUT);
-  pinMode(switvhPinTow,OUTPUT);
+  pinMode(switvhPinTow, OUTPUT);
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  boolean inputOne;
-  boolean outputOne;
 
-  inputOne = digitalRead(switchPinOne);//スイッチの入力状態をinputに代入
-  outputOne = digitalRead(switvhPinTow);
-  Serial.println("input pin status : " + String(inputOne));//「input」を送信、改行
-  Serial.println("output pin status : " + String(outputOne));
+  sendStartMessage("Switch Status start");
+
+  outputPinStatusMessage(switchPinOne,"switchPinOne");
+  outputPinStatusMessage(switvhPinTow,"switvhPinTow");
+
+  sendStartMessage("Switch Status End");
   delay(1000);//1000msec待機(1秒待機)
 }
 
@@ -55,4 +63,13 @@ void sendStartMessage(String _message){
   if(debug == true){
     Serial.println("----------------- " + _message + " -----------------" );
   }
+}
+
+/*
+    ピンのステータス取得
+*/
+void outputPinStatusMessage(int _pinNo, String _pinNmae){
+  boolean _pinStatus;
+  _pinStatus = digitalRead(_pinNo);
+  Serial.println( _pinNmae + " pin status : " + String(_pinStatus));
 }

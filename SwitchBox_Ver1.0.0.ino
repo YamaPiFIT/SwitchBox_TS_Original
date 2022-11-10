@@ -1,12 +1,3 @@
-//
-// スイッチボックス Ver 1.0.0
-//
-// for Arduino Leonardo
-//
-//　2021.11.08 H.Tanaka
-//
-
-
 #include <Keyboard.h>
 /*
   #include <Joystick.h>
@@ -70,6 +61,10 @@ void setup() {
   // シリアル開始（デバックの場合）
   if (debug) {
     Serial.begin(9600);
+  }
+
+  // シリアル開始の準備が整うまでここで処理を止める。
+  while( !Serial ) {
   }
 
   // 配列初期化
