@@ -14,15 +14,28 @@ const boolean debug = true;// デバッグ用フラグ
 //const int matrixPinOutputNo[] = {0,1,2,3};
 const int matrixPinInputNo[] = {0,1,2,3};
 const int matrixPinOutputNo[] = {4,5,6,7};
+/*
+  ロータリーエンコーダーで使用しているピン番号を設定
+*/
+const int rotaryEncoderInputNo[] = {8,9,10,11,12,13,19,20,21,22,23,24};
 
-const int matrixPinInputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
+/*
+　配列のサイズ
+*/
+const int matrixPinInputNoSize = sizeof(matrixPinInputNo) / sizeof(int);
 const int matrixPinOutputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
+const int rotaryEncoderInputNoSize = sizeof(rotaryEncoderInputNo) / sizeof(int);
 
 /*
 　マトリックスで押された情報を保存する
 　[出力先][入力先]
 */
-boolean matrixState [sizeof(matrixPinOutputNo)][sizeof(matrixPinInputNo)] = {};
+boolean matrixState [matrixPinOutputNoSize][matrixPinInputNoSize] = {};
+/*
+　ロータリーエンコーダーの情報を保存する
+  [入力先]
+*/
+boolean rotaryEncoderState [rotaryEncoderInputNoSize] = {};
 
 void setup() {
   // put your setup code here, to run once:
@@ -59,6 +72,10 @@ void initialize(){
   for(int i = 0; i < matrixPinOutputNoSize; i++){
     pinMode(matrixPinOutputNo[i], OUTPUT);
   }
+  //RotaryEncoder intput set
+  for(int i = 0; i < rotaryEncoderInputNoSize; i++){
+    pinMode(rotaryEncoderInputNo[i], INPUT);
+  }
   sendMessage("matrix input setup end");
 
 }
@@ -67,14 +84,14 @@ void loop() {
   // put your main code here, to run repeatedly:
   sendStartMessage("Loop Method Strat");
   
-  //outputPinStatusMessage(switchPinOne,"switchPinOne");
-  //outputPinStatusMessage(switvhPinTow,"switvhPinTow");
-  
   readMatrixPin();
-
+  readRotaryEncoder();
 
   sendStartMessage("Loop Method End");
-  delay(1000);//1000msec待機(1秒待機)
+    // シリアル開始（デバックの場合）
+  if (debug == true) {
+    delay(1000);//1000msec待機(1秒待機)
+  }
 }
 
 
@@ -115,7 +132,7 @@ boolean outputMatrixPinStatus(int _pinNo){
 /*
   マトリックスのピン情報を取得する
 */
-int readMatrixPin(){
+void readMatrixPin(){
   //最初にすべての電源をOFFにする
   for(int i = 0; i < matrixPinOutputNoSize; i++){
     // 処理対象OUTのPINをLOWにする
@@ -142,5 +159,15 @@ int readMatrixPin(){
     // 処理対象OUTのPINをLOWにする
     digitalWrite(matrixPinOutputNo[i], LOW);
   }
-  
 }
+
+/*
+  ロータリーエンコーダーの読み取り
+*/
+void readRotaryEncoder(){
+  for(int i = 0; i < rotaryEncoderInputNoSize; i++){
+      rotaryEncoderState[i] = outputMatrixPinStatus(rotaryEncoderInputNo[i]);
+      Serial.println(" pin status ["+String(rotaryEncoderInputNo[i])+"] : " + String(rotaryEncoderState[i]));
+    }
+}
+
