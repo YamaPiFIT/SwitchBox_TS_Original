@@ -10,8 +10,13 @@ const boolean debug = true;// デバッグ用フラグ
 /*
 　マトリックスで使用しているピン番号を設定
 */
-const int matrixPinInputNo[] = {4,5,6,7};
-const int matrixPinOutputNo[] = {0,1,2,3};
+//const int matrixPinInputNo[] = {4,5,6,7};
+//const int matrixPinOutputNo[] = {0,1,2,3};
+const int matrixPinInputNo[] = {0,1,2,3};
+const int matrixPinOutputNo[] = {4,5,6,7};
+
+const int matrixPinInputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
+const int matrixPinOutputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
 
 /*
 　マトリックスで押された情報を保存する
@@ -35,9 +40,6 @@ void setup() {
   sendStartMessage("Initialize Strat");
   initialize();
   sendStartMessage("Initialize End");
-
-
-  sendStartMessage("Loop Method Strat");
 }
 
 /*
@@ -48,34 +50,30 @@ void initialize(){
   /*
     ピンが受信か送信かを設定
   */
-  //pinMode(switchPinOne, INPUT);
-  //pinMode(switvhPinTow, OUTPUT);
-
-
   //matrix input setup
-  for(int i = sizeof(matrixPinInputNo); i < sizeof(matrixPinInputNo); i++){
+  sendMessage("matrix input setup start"); 
+  for(int i = 0; i < matrixPinInputNoSize; i++){
     pinMode(matrixPinInputNo[i], INPUT);
   }
   //matrix output set
-  for(int i = sizeof(matrixPinOutputNo); i < sizeof(matrixPinOutputNo); i++){
+  for(int i = 0; i < matrixPinOutputNoSize; i++){
     pinMode(matrixPinOutputNo[i], OUTPUT);
   }
-  
+  sendMessage("matrix input setup end");
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-  sendStartMessage("Switch Status start");
-
+  sendStartMessage("Loop Method Strat");
+  
   //outputPinStatusMessage(switchPinOne,"switchPinOne");
   //outputPinStatusMessage(switvhPinTow,"switvhPinTow");
   
   readMatrixPin();
 
 
-  sendStartMessage("Switch Status End");
+  sendStartMessage("Loop Method End");
   delay(1000);//1000msec待機(1秒待機)
 }
 
@@ -88,6 +86,13 @@ void sendStartMessage(String _message){
     Serial.println("----------------- " + _message + " -----------------" );
   }
 }
+
+void sendMessage(String _message){
+  if(debug == true){
+    Serial.println(_message);
+  }
+}
+
 
 /*
   ピンのステータス取得（メッセージver)
@@ -111,32 +116,31 @@ boolean outputMatrixPinStatus(int _pinNo){
   マトリックスのピン情報を取得する
 */
 int readMatrixPin(){
-
   //最初にすべての電源をOFFにする
-  for(int i = sizeof(matrixPinOutputNo); i < sizeof(matrixPinOutputNo); i++){
+  for(int i = 0; i < matrixPinOutputNoSize; i++){
     // 処理対象OUTのPINをLOWにする
     digitalWrite(matrixPinOutputNo[i], LOW);
   }
 
+  Serial.println("[OUTPUT] - [INPUT]");
   //matrix output set
-  for(int i = sizeof(matrixPinOutputNo); i < sizeof(matrixPinOutputNo); i++){
+  for(int i = 0; i < matrixPinOutputNoSize; i++){
     //処理対象のOUTPUTをONにする
     digitalWrite(matrixPinOutputNo[i], HIGH);
-
     //何を押されているかをチェックする(i行目のチェック)
-    for(int j = sizeof(matrixPinInputNo); j < sizeof(matrixPinInputNo); j++){
+    for(int j = 0; j < matrixPinInputNoSize; j++){
       matrixState[i][j] = outputMatrixPinStatus(matrixPinInputNo[j]);
-      outputPinStatusMessage(matrixState[i][j],"matrixState["+i+"]["+j"]");
+      Serial.println(" pin status ["+String(matrixPinOutputNo[i])+"]["+String(matrixPinInputNo[j])+"] : " + String(matrixState[i][j]));
     }
     
-    // 処理対象OUTのPINをLOWにする
+    // 処理対象のOUTPUTをLOWにする
     digitalWrite(matrixPinOutputNo[i], LOW);
   }
 
   //最初にすべての電源をOFFにする
-  for(int i = sizeof(matrixPinOutputNo); i < sizeof(matrixPinOutputNo); i++){
+  for(int i = 0; i < matrixPinOutputNoSize; i++){
     // 処理対象OUTのPINをLOWにする
     digitalWrite(matrixPinOutputNo[i], LOW);
   }
-
+  
 }
