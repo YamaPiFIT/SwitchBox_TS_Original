@@ -1,10 +1,5 @@
-////include
-#include <Joystick.h>
 
-Joystick_ Joystick;
-
-
-////Const
+//Const
 const boolean debug = true;// デバッグ用フラグ
 /*
  ピンの番号を設定
@@ -15,22 +10,20 @@ const boolean debug = true;// デバッグ用フラグ
 /*
 　マトリックスで使用しているピン番号を設定
 */
-//const int matrixPinInputNo[] = {2,3,6,7};
-//const int matrixPinOutputNo[] = {10,11,12,13};
+//const int matrixPinInputNo[] = {4,5,6,7};
+//const int matrixPinOutputNo[] = {0,1,2,3};
 const int matrixPinInputNo[] = {0,1,2,3};
 const int matrixPinOutputNo[] = {4,5,6,7};
-
 /*
   ロータリーエンコーダーで使用しているピン番号を設定
 */
-const int rotaryEncoderInputNo[] = {8,9,10,11,12,13,18,19,20,21,22,23};
+const int rotaryEncoderInputNo[] = {8,9,10,11,12,13,19,20,21,22,23,24};
 
 /*
 　配列のサイズ
 */
 const int matrixPinInputNoSize = sizeof(matrixPinInputNo) / sizeof(int);
 const int matrixPinOutputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
-//const int matrixPinMaxCount = matrixPinInputNoSize + matrixPinOutputNoSize;
 const int rotaryEncoderInputNoSize = sizeof(rotaryEncoderInputNo) / sizeof(int);
 
 /*
@@ -44,25 +37,17 @@ boolean matrixState [matrixPinOutputNoSize][matrixPinInputNoSize] = {};
 */
 boolean rotaryEncoderState [rotaryEncoderInputNoSize] = {};
 
-/*
-  ボタン番号(Windowsで認識されるボタンNoと紐ついている)
-*/
-int buttonNo = 0;
-
 void setup() {
   // put your setup code here, to run once:
-  
-  
+
   // シリアル開始（デバックの場合）
   if (debug == true) {
     Serial.begin(9600);
-
-    // シリアル開始の準備が整うまでここで処理を止める。
-    while( !Serial ) {
-    }
   }
-  
 
+  // シリアル開始の準備が整うまでここで処理を止める。
+  while( !Serial ) {
+  }
 
   //初期化
   sendStartMessage("Initialize Strat");
@@ -81,32 +66,23 @@ void initialize(){
   //matrix input setup
   sendMessage("matrix input setup start"); 
   for(int i = 0; i < matrixPinInputNoSize; i++){
-    //pinMode(matrixPinInputNo[i], INPUT);
-    pinMode(matrixPinInputNo[i], INPUT_PULLUP);
+    pinMode(matrixPinInputNo[i], INPUT);
   }
   //matrix output set
   for(int i = 0; i < matrixPinOutputNoSize; i++){
     pinMode(matrixPinOutputNo[i], OUTPUT);
   }
-  
   //RotaryEncoder intput set
   for(int i = 0; i < rotaryEncoderInputNoSize; i++){
-    //pinMode(rotaryEncoderInputNo[i], INPUT);
-    pinMode(rotaryEncoderInputNo[i], INPUT_PULLUP);
+    pinMode(rotaryEncoderInputNo[i], INPUT);
   }
   sendMessage("matrix input setup end");
-  
 
-  // Initialize Joystick Library
-  Joystick.begin();
-  
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   sendStartMessage("Loop Method Strat");
-
-  buttonNo = 0;
   
   readMatrixPin();
   readRotaryEncoder();
@@ -150,45 +126,20 @@ void outputPinStatusMessage(int _pinNo, String _pinNmae){
 boolean outputMatrixPinStatus(int _pinNo){
   boolean _pinStatus;
   _pinStatus = digitalRead(_pinNo);
-  return !_pinStatus;
-}
-
-boolean outputPinStatus(int _pinNo){
-  boolean _pinStatus;
-  _pinStatus = !digitalRead(_pinNo);
   return _pinStatus;
 }
-
-/*
-  マトリクスのピンが反転処理が必要かどうかを調べ、必要なら反転させる
-*/
-void checkMatrixPinStatus(int j){
-  int _ans = 0;
-  for(int i = 0; i < matrixPinOutputNoSize; i++){
-    _ans += matrixState[i][j];
-  }
-
-  if(_ans > 0){
-    for(int i = 0; i < matrixPinOutputNoSize; i++){
-       matrixState[i][j] = !matrixState[i][j];
-    }
-  }  
-}
-
-
 
 /*
   マトリックスのピン情報を取得する
 */
 void readMatrixPin(){
-
   //最初にすべての電源をOFFにする
   for(int i = 0; i < matrixPinOutputNoSize; i++){
     // 処理対象OUTのPINをLOWにする
     digitalWrite(matrixPinOutputNo[i], LOW);
   }
 
-  Serial.println("[OUTPUT Pin No.] - [INPUT Pin No.]");
+  Serial.println("[OUTPUT] - [INPUT]");
   //matrix output set
   for(int i = 0; i < matrixPinOutputNoSize; i++){
     //処理対象のOUTPUTをONにする
@@ -196,9 +147,7 @@ void readMatrixPin(){
     //何を押されているかをチェックする(i行目のチェック)
     for(int j = 0; j < matrixPinInputNoSize; j++){
       matrixState[i][j] = outputMatrixPinStatus(matrixPinInputNo[j]);
-      //Serial.println(" pin status ["+String(matrixPinOutputNo[i])+"]["+String(matrixPinInputNo[j])+"] : " + String(matrixState[i][j]));
-      //Joystick.setButton(_buttonNo, matrixState[i][j]);
-      //_buttonNo++;
+      Serial.println(" pin status ["+String(matrixPinOutputNo[i])+"]["+String(matrixPinInputNo[j])+"] : " + String(matrixState[i][j]));
     }
     
     // 処理対象のOUTPUTをLOWにする
@@ -210,22 +159,6 @@ void readMatrixPin(){
     // 処理対象OUTのPINをLOWにする
     digitalWrite(matrixPinOutputNo[i], LOW);
   }
-
-  //反転処理が必要かどうかを調べる
-  for(int j = 0; j < matrixPinInputNoSize; j++){
-    checkMatrixPinStatus(j);
-  }
-
-  //デバックログ＆ボタンを設定する
-  //ボタン番号(Windowsで認識されるボタンNoと紐ついている)
-  for(int i = 0; i < matrixPinOutputNoSize; i++){
-    for(int j = 0; j < matrixPinInputNoSize; j++){
-      Serial.println(" pin status ["+String(matrixPinOutputNo[i])+"]["+String(matrixPinInputNo[j])+"] : " + String(matrixState[i][j]));
-      Joystick.setButton(buttonNo, matrixState[i][j]);
-      buttonNo++;
-    }
-  }
-
 }
 
 /*
@@ -233,10 +166,8 @@ void readMatrixPin(){
 */
 void readRotaryEncoder(){
   for(int i = 0; i < rotaryEncoderInputNoSize; i++){
-      rotaryEncoderState[i] = outputPinStatus(rotaryEncoderInputNo[i]);
+      rotaryEncoderState[i] = outputMatrixPinStatus(rotaryEncoderInputNo[i]);
       Serial.println(" pin status ["+String(rotaryEncoderInputNo[i])+"] : " + String(rotaryEncoderState[i]));
-      Joystick.setButton(buttonNo, rotaryEncoderState[i]);
-      buttonNo++;
     }
 }
 
