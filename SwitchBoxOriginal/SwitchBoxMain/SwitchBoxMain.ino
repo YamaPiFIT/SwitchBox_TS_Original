@@ -5,12 +5,7 @@ Joystick_ Joystick;
 
 
 ////Const
-const boolean debug = true;// デバッグ用フラグ
-/*
- ピンの番号を設定
-*/
-//const int switchPinOne = 0;
-//const int switvhPinTow = 10;
+const boolean debug = true; // デバッグ用フラグ
 
 /*
 　マトリックスで使用しているピン番号を設定
@@ -38,6 +33,7 @@ const int rotaryEncoderInputNoSize = sizeof(rotaryEncoderInputNo) / sizeof(int);
 　[出力先][入力先]
 */
 boolean matrixState [matrixPinOutputNoSize][matrixPinInputNoSize] = {};
+
 /*
 　ロータリーエンコーダーの情報を保存する
   [入力先]
@@ -96,6 +92,26 @@ void initialize(){
   }
   sendMessage("matrix input setup end");
   
+  // Set Range Values
+  Joystick.setXAxisRange(-127, 127);
+  Joystick.setYAxisRange(-127, 127);
+  Joystick.setZAxisRange(-127, 127);
+  Joystick.setRxAxisRange(0, 360);
+  Joystick.setRyAxisRange(360, 0);
+  Joystick.setRzAxisRange(0, 720);
+  Joystick.setThrottleRange(0, 255);
+  Joystick.setRudderRange(255, 0);
+
+  Joystick.setXAxis(127); //軸のX座標(+が右 -が左)
+  Joystick.setYAxis(-127); //軸のY座標(-が上 +が下)
+  /*
+  他にも
+  setZAxis  Z軸
+  setRxAxis X回転(ヨーレート？）
+  setRyAxis Y回転(ヨーレート？）
+  setRzAxis Z回転(ヨーレート？）
+  setThrottle スロットル
+  */
 
   // Initialize Joystick Library
   Joystick.begin();
@@ -174,7 +190,6 @@ void checkMatrixPinStatus(int j){
     }
   }  
 }
-
 
 
 /*
