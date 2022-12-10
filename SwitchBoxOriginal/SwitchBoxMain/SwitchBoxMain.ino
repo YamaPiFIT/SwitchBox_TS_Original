@@ -14,6 +14,7 @@ const boolean debug = true; // デバッグ用フラグ
 //const int matrixPinOutputNo[] = {10,11,12,13};
 const int matrixPinInputNo[] = {0,1,2,3};
 const int matrixPinOutputNo[] = {4,5,6,7};
+const int analogPinInputNo[] ={A0,A1};
 
 /*
   ロータリーエンコーダーで使用しているピン番号を設定
@@ -25,8 +26,10 @@ const int rotaryEncoderInputNo[] = {8,9,10,11,12,13,18,19,20,21,22,23};
 */
 const int matrixPinInputNoSize = sizeof(matrixPinInputNo) / sizeof(int);
 const int matrixPinOutputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
+const int analogPinInputNoSize = sizeof(analogPinInputNo) / sizeof(int);
 //const int matrixPinMaxCount = matrixPinInputNoSize + matrixPinOutputNoSize;
 const int rotaryEncoderInputNoSize = sizeof(rotaryEncoderInputNo) / sizeof(int);
+
 
 /*
 　マトリックスで押された情報を保存する
@@ -39,6 +42,12 @@ boolean matrixState [matrixPinOutputNoSize][matrixPinInputNoSize] = {};
   [入力先]
 */
 boolean rotaryEncoderState [rotaryEncoderInputNoSize] = {};
+
+/*
+　アナログスティックの情報を保存する
+  [入力先]
+*/
+int analogStickSatate [rotaryEncoderInputNoSize] = {};
 
 /*
   ボタン番号(Windowsで認識されるボタンNoと紐ついている)
@@ -58,8 +67,6 @@ void setup() {
     }
   }
   
-
-
   //初期化
   sendStartMessage("Initialize Strat");
   initialize();
@@ -90,28 +97,21 @@ void initialize(){
     //pinMode(rotaryEncoderInputNo[i], INPUT);
     pinMode(rotaryEncoderInputNo[i], INPUT_PULLUP);
   }
+
+  for(int i=0; i < analogPinInputNoSize; i++){
+    pinMode(analogPinInputNo[i], INPUT_PULLUP);
+  }
   sendMessage("matrix input setup end");
   
   // Set Range Values
-  Joystick.setXAxisRange(-127, 127);
-  Joystick.setYAxisRange(-127, 127);
+  Joystick.setXAxisRange(-1024, 1024);
+  Joystick.setYAxisRange(-1024, 1024);
   Joystick.setZAxisRange(-127, 127);
   Joystick.setRxAxisRange(0, 360);
   Joystick.setRyAxisRange(360, 0);
   Joystick.setRzAxisRange(0, 720);
   Joystick.setThrottleRange(0, 255);
   Joystick.setRudderRange(255, 0);
-
-  Joystick.setXAxis(127); //軸のX座標(+が右 -が左)
-  Joystick.setYAxis(-127); //軸のY座標(-が上 +が下)
-  /*
-  他にも
-  setZAxis  Z軸
-  setRxAxis X回転(ヨーレート？）
-  setRyAxis Y回転(ヨーレート？）
-  setRzAxis Z回転(ヨーレート？）
-  setThrottle スロットル
-  */
 
   // Initialize Joystick Library
   Joystick.begin();
@@ -126,6 +126,7 @@ void loop() {
   
   readMatrixPin();
   readRotaryEncoder();
+  readAnalogStick();
 
   sendStartMessage("Loop Method End");
     // シリアル開始（デバックの場合）
@@ -174,6 +175,7 @@ boolean outputPinStatus(int _pinNo){
   _pinStatus = !digitalRead(_pinNo);
   return _pinStatus;
 }
+
 
 /*
   マトリクスのピンが反転処理が必要かどうかを調べ、必要なら反転させる
@@ -253,5 +255,27 @@ void readRotaryEncoder(){
       Joystick.setButton(buttonNo, rotaryEncoderState[i]);
       buttonNo++;
     }
+}
+
+/*
+アナログスティックの読み取り
+*/
+void readAnalogStick(){
+
+  for(int i = 0; i < analogPinInputNoSize; i++){
+      analogStickSatate[i] = analogRead(analogPinInputNo[i]);
+      Serial.println(" pin status ["+String(analogPinInputNo[i])+"] : " + String(analogStickSatate[i]));
+    }
+
+  Joystick.setXAxis(analogStickSatate[0]); //軸のX座標(+が右 -が左)
+  Joystick.setYAxis(analogStickSatate[1]); //軸のY座標(-が上 +が下)
+  /*
+  他にも
+  setZAxis  Z軸
+  setRxAxis X回転(ヨーレート？）
+  setRyAxis Y回転(ヨーレート？）
+  setRzAxis Z回転(ヨーレート？）
+  setThrottle スロットル
+  */
 }
 
