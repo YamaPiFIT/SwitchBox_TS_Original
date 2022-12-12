@@ -17,5 +17,15 @@ namespace SelectMessageApp
             InitializeComponent();
         }
 
+        /// <summary>
+        /// メッセ－ジアプリ起動ボタン押下
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MessageAppStartButon_Click(object sender, EventArgs e)
+        {
+            SendMessage _sendMessage = new SendMessage();
+            _sendMessage.Show();
+        }
     }
 }

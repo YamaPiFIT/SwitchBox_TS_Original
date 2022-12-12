@@ -1,0 +1,13 @@
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\bin\Debug\SelectMessageApp.exe.config
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\bin\Debug\SelectMessageApp.exe
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\bin\Debug\SelectMessageApp.pdb
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.csproj.AssemblyReference.cache
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.csproj.SuggestedBindingRedirects.cache
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.MainMenu.resources
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.Properties.Resources.resources
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.SendMessage.resources
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.SetupMeny.resources
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.csproj.GenerateResource.cache
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.csproj.CoreCompileInputs.cache
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.exe
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.pdb

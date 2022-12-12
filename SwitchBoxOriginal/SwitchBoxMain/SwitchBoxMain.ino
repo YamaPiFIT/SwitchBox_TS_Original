@@ -66,7 +66,7 @@ void setup() {
     while( !Serial ) {
     }
   }
-  
+
   //初期化
   sendStartMessage("Initialize Strat");
   initialize();
@@ -92,15 +92,17 @@ void initialize(){
     pinMode(matrixPinOutputNo[i], OUTPUT);
   }
   
-  //RotaryEncoder intput set
+  //RotaryEncoder input set
   for(int i = 0; i < rotaryEncoderInputNoSize; i++){
     //pinMode(rotaryEncoderInputNo[i], INPUT);
     pinMode(rotaryEncoderInputNo[i], INPUT_PULLUP);
   }
 
+  //analog stick input set
   for(int i=0; i < analogPinInputNoSize; i++){
-    pinMode(analogPinInputNo[i], INPUT_PULLUP);
+    pinMode(analogPinInputNo[i], INPUT);
   }
+  
   sendMessage("matrix input setup end");
   
   // Set Range Values
