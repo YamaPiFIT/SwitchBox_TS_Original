@@ -49,5 +49,11 @@ namespace SelectMessageApp
             GamePadTest _gamePadTest = new GamePadTest();
             _gamePadTest.Show();
         }
+
+        private void PORT_Click(object sender, EventArgs e)
+        {
+            Form1 _form1 = new Form1();
+            _form1.Show();
+        }
     }
 }

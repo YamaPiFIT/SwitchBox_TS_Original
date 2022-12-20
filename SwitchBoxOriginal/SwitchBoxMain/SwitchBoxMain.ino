@@ -54,10 +54,16 @@ int analogStickSatate [rotaryEncoderInputNoSize] = {};
 */
 int buttonNo = 0;
 
+boolean restart = false;
+
+/*
+  シリアルデータ受信用変数
+*/
+int testPosX = 0;
+
 void setup() {
   // put your setup code here, to run once:
-  
-  
+  /*
   // シリアル開始（デバックの場合）
   if (debug == true) {
     Serial.begin(9600);
@@ -66,11 +72,17 @@ void setup() {
     while( !Serial ) {
     }
   }
+  */
+
+  Serial.begin(9600);
+  // シリアル開始の準備が整うまでここで処理を止める。
+  while( !Serial ) {
+  }
 
   //初期化
-  sendStartMessage("Initialize Strat");
+  //sendStartMessage("Initialize Strat");
   initialize();
-  sendStartMessage("Initialize End");
+  //sendStartMessage("Initialize End");
 }
 
 /*
@@ -82,7 +94,7 @@ void initialize(){
     ピンが受信か送信かを設定
   */
   //matrix input setup
-  sendMessage("matrix input setup start"); 
+  //sendMessage("matrix input setup start"); 
   for(int i = 0; i < matrixPinInputNoSize; i++){
     //pinMode(matrixPinInputNo[i], INPUT);
     pinMode(matrixPinInputNo[i], INPUT_PULLUP);
@@ -105,7 +117,7 @@ void initialize(){
     pinMode(analogPinInputNo[i], INPUT);
   }
   
-  sendMessage("matrix input setup end");
+  //sendMessage("matrix input setup end");
   
   // Set Range Values
   Joystick.setXAxisRange(-1024, 1024);
@@ -124,24 +136,38 @@ void initialize(){
 
 void loop() {
   // put your main code here, to run repeatedly:
-  sendStartMessage("Loop Method Strat");
+  if(restart == false){
+    initialize();
+    restart = true;
+  }
+  
+  //delay(1000);//1000msec待機(1秒待機)
+  //sendStartMessage("Loop Method Strat");
+
+  if (Serial.available() > 0) {
+    getSerialData();
+  }
 
   buttonNo = 0;
-  
   readMatrixPin();
   //readRotaryEncoder();
   readAnalogStick();
 
-  sendStartMessage("Loop Method End");
-    // シリアル開始（デバックの場合）
-  if (debug == true) {
-    delay(1000);//1000msec待機(1秒待機)
-  }
+  //sendStartMessage("Loop Method End");
 }
 
+/*
+  シリアルデータの受信
+*/
+void getSerialData(){
+  // シリアル受信
+  // \r(CR), \r\n(CR+LF) ，\n(LF)
+  String _str = Serial.readStringUntil('\r');
+  testPosX = _str.toInt();
+}
 
 /*
-    開始のメッセージ送信（デバッグ用）
+  開始のメッセージ送信（デバッグ用）
 */
 void sendStartMessage(String _message){
   if(debug == true){
@@ -209,7 +235,7 @@ void readMatrixPin(){
     digitalWrite(matrixPinOutputNo[i], LOW);
   }
 
-  Serial.println("[OUTPUT Pin No.] - [INPUT Pin No.]");
+  //Serial.println("[OUTPUT Pin No.] - [INPUT Pin No.]");
   //matrix output set
   for(int i = 0; i < matrixPinOutputNoSize; i++){
     //処理対象のOUTPUTをONにする
@@ -217,9 +243,6 @@ void readMatrixPin(){
     //何を押されているかをチェックする(i行目のチェック)
     for(int j = 0; j < matrixPinInputNoSize; j++){
       matrixState[i][j] = outputMatrixPinStatus(matrixPinInputNo[j]);
-      //Serial.println(" pin status ["+String(matrixPinOutputNo[i])+"]["+String(matrixPinInputNo[j])+"] : " + String(matrixState[i][j]));
-      //Joystick.setButton(_buttonNo, matrixState[i][j]);
-      //_buttonNo++;
     }
     
     // 処理対象のOUTPUTをLOWにする
@@ -241,7 +264,7 @@ void readMatrixPin(){
   //ボタン番号(Windowsで認識されるボタンNoと紐ついている)
   for(int i = 0; i < matrixPinOutputNoSize; i++){
     for(int j = 0; j < matrixPinInputNoSize; j++){
-      Serial.println(" pin status ["+String(matrixPinOutputNo[i])+"]["+String(matrixPinInputNo[j])+"] : " + String(matrixState[i][j]));
+      //Serial.println(" pin status ["+String(matrixPinOutputNo[i])+"]["+String(matrixPinInputNo[j])+"] : " + String(matrixState[i][j]));
       Joystick.setButton(buttonNo, matrixState[i][j]);
       buttonNo++;
     }
@@ -255,7 +278,7 @@ void readMatrixPin(){
 void readRotaryEncoder(){
   for(int i = 0; i < rotaryEncoderInputNoSize; i++){
       rotaryEncoderState[i] = outputPinStatus(rotaryEncoderInputNo[i]);
-      Serial.println(" pin status ["+String(rotaryEncoderInputNo[i])+"] : " + String(rotaryEncoderState[i]));
+      //Serial.println(" pin status ["+String(rotaryEncoderInputNo[i])+"] : " + String(rotaryEncoderState[i]));
       Joystick.setButton(buttonNo, rotaryEncoderState[i]);
       buttonNo++;
     }
@@ -268,10 +291,10 @@ void readAnalogStick(){
 
   for(int i = 0; i < analogPinInputNoSize; i++){
       analogStickSatate[i] = analogRead(analogPinInputNo[i]);
-      Serial.println(" pin status ["+String(analogPinInputNo[i])+"] : " + String(analogStickSatate[i]));
+      //Serial.println(" pin status ["+String(analogPinInputNo[i])+"] : " + String(analogStickSatate[i]));
     }
 
-  Joystick.setXAxis(500); //軸のX座標(+が右 -が左)
+  Joystick.setXAxis(testPosX); //軸のX座標(+が右 -が左)
   Joystick.setYAxis(200); //軸のY座標(-が上 +が下)
   /*
   Joystick.setXAxis(analogStickSatate[0]); //軸のX座標(+が右 -が左)

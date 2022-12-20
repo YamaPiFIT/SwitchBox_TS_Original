@@ -20,3 +20,4 @@ F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\Swi
 F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\bin\Debug\Vortice.XInput.pdb
 F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\bin\Debug\Vortice.XInput.xml
 F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.csproj.SuggestedBindingRedirects.cache
+F:\作成物\04_switchBox\switchBox\SwitchBox_Ver1.0.0\SwitchBox_TS_Original\SwitchBoxOriginal\SelectMessageApp\SelectMessageApp\obj\Debug\SelectMessageApp.Form1.resources
