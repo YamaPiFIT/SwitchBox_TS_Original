@@ -28,33 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.MoveStateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // MoveStateButton
             // 
-            this.button1.Location = new System.Drawing.Point(103, 150);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(245, 127);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.MoveStateButton.Location = new System.Drawing.Point(14, 615);
+            this.MoveStateButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.MoveStateButton.Name = "MoveStateButton";
+            this.MoveStateButton.Size = new System.Drawing.Size(322, 34);
+            this.MoveStateButton.TabIndex = 0;
+            this.MoveStateButton.Text = "to achieve transparency";
+            this.MoveStateButton.UseVisualStyleBackColor = true;
+            this.MoveStateButton.Click += new System.EventHandler(this.MoveStateButton_Click);
             // 
             // SendMessage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 441);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(792, 662);
+            this.Controls.Add(this.MoveStateButton);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "SendMessage";
             this.Text = "SendMessage";
             this.TransparencyKey = System.Drawing.Color.White;
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SendMessage_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SendMessage_MouseMove);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button MoveStateButton;
     }
 }

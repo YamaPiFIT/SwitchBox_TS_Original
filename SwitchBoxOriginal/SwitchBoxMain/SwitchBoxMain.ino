@@ -5,15 +5,15 @@ Joystick_ Joystick;
 
 
 ////Const
-const boolean debug = true; // デバッグ用フラグ
-
+//const boolean debug = true; // デバッグ用フラグ
+const boolean debug = false; // デバッグ用フラグ
 /*
 　マトリックスで使用しているピン番号を設定
 */
 //const int matrixPinInputNo[] = {2,3,6,7};
 //const int matrixPinOutputNo[] = {10,11,12,13};
-const int matrixPinInputNo[] = {0,1,2,3};
-const int matrixPinOutputNo[] = {4,5,6,7};
+const int matrixPinInputNo[] = {2,3,4,5};
+const int matrixPinOutputNo[] = {6,7,8,9,10,11,12};
 const int analogPinInputNo[] ={A0,A1};
 
 /*
@@ -27,7 +27,7 @@ const int rotaryEncoderInputNo[] = {8,9,10,11,12,13,18,19,20,21,22,23};
 const int matrixPinInputNoSize = sizeof(matrixPinInputNo) / sizeof(int);
 const int matrixPinOutputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
 const int analogPinInputNoSize = sizeof(analogPinInputNo) / sizeof(int);
-//const int matrixPinMaxCount = matrixPinInputNoSize + matrixPinOutputNoSize;
+const int matrixPinMaxCount = matrixPinInputNoSize + matrixPinOutputNoSize;
 const int rotaryEncoderInputNoSize = sizeof(rotaryEncoderInputNo) / sizeof(int);
 
 
@@ -93,10 +93,12 @@ void initialize(){
   }
   
   //RotaryEncoder input set
+  /*  
   for(int i = 0; i < rotaryEncoderInputNoSize; i++){
     //pinMode(rotaryEncoderInputNo[i], INPUT);
     pinMode(rotaryEncoderInputNo[i], INPUT_PULLUP);
   }
+  */
 
   //analog stick input set
   for(int i=0; i < analogPinInputNoSize; i++){
@@ -127,7 +129,7 @@ void loop() {
   buttonNo = 0;
   
   readMatrixPin();
-  readRotaryEncoder();
+  //readRotaryEncoder();
   readAnalogStick();
 
   sendStartMessage("Loop Method End");
@@ -269,8 +271,12 @@ void readAnalogStick(){
       Serial.println(" pin status ["+String(analogPinInputNo[i])+"] : " + String(analogStickSatate[i]));
     }
 
+  Joystick.setXAxis(500); //軸のX座標(+が右 -が左)
+  Joystick.setYAxis(200); //軸のY座標(-が上 +が下)
+  /*
   Joystick.setXAxis(analogStickSatate[0]); //軸のX座標(+が右 -が左)
   Joystick.setYAxis(analogStickSatate[1]); //軸のY座標(-が上 +が下)
+  */
   /*
   他にも
   setZAxis  Z軸

@@ -37,7 +37,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(399, 409);
             this.Name = "SetupMeny";
-            this.Text = "SetupMeny";
+            this.Text = "Setup Meny";
             this.ResumeLayout(false);
 
         }
