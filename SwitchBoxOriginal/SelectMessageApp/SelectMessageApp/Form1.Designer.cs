@@ -47,7 +47,7 @@
             // cmbPortName
             // 
             this.cmbPortName.FormattingEnabled = true;
-            this.cmbPortName.Location = new System.Drawing.Point(218, 86);
+            this.cmbPortName.Location = new System.Drawing.Point(218, 95);
             this.cmbPortName.Name = "cmbPortName";
             this.cmbPortName.Size = new System.Drawing.Size(332, 26);
             this.cmbPortName.TabIndex = 0;

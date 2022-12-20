@@ -88,7 +88,7 @@
             // 
             this.PORT.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PORT.Font = new System.Drawing.Font("UD デジタル 教科書体 NK-B", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PORT.Location = new System.Drawing.Point(75, 175);
+            this.PORT.Location = new System.Drawing.Point(77, 167);
             this.PORT.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PORT.Name = "PORT";
             this.PORT.Size = new System.Drawing.Size(527, 78);
