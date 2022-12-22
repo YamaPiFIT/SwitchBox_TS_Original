@@ -23,6 +23,9 @@ namespace WPF_SetupApp
         public MainWindow()
         {
             InitializeComponent();
+
+            Uri uri = new Uri("/Page1.xaml", UriKind.Relative);
+            frame.Source = uri;
         }
     }
 }

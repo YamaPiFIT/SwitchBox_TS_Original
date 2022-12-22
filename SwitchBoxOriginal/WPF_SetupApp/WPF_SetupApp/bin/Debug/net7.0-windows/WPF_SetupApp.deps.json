@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "WPF_SetupApp/1.0.0": {
         "dependencies": {
+          "MaterialDesignColors": "2.0.9",
           "MaterialDesignThemes.MahApps": "0.2.5"
         },
         "runtime": {
