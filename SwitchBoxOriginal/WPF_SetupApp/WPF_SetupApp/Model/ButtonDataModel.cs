@@ -11,10 +11,10 @@ namespace WPF_SetupApp.Model
         public string TextData { get; set; }
         public string SecData { get; set; }
 
-        public ButtonDataModel(string _textData, string _secData)
+        public ButtonDataModel()
         {
-            TextData = _textData;
-            SecData = _secData;
+            TextData = "";
+            SecData = "";
         }
     }
 }

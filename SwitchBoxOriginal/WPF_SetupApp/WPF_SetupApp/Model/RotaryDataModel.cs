@@ -11,10 +11,10 @@ namespace WPF_SetupApp.Model
         public string RightTextData { get; set; }
         public string LeftTextData { get; set; }
 
-        public RotaryDataModel(string _rightTextData,string _leftTextData) 
+        public RotaryDataModel() 
         {
-            RightTextData = _rightTextData;
-            LeftTextData = _leftTextData;
+            RightTextData = "";
+            LeftTextData = "";
         }
     }
 }

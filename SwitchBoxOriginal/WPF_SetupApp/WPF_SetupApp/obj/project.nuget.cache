@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pSM7n5abbgjqVJ82ZF9WHCXNRxlSsrwFuBJMqlvAi2axCWarCUnMyv1tXdCfkVuza1anIhN4a4FY/M33ZiDOWw==",
+  "dgSpecHash": "4VkqRNoCDxvaY8aS1rhBpy7h3U9eXZwXuC70cR/v1VGfImIyNhPCAOjQEffvnZNNSZD3feTxvFpig0Urjpet1A==",
   "success": true,
   "projectFilePath": "F:\\作成物\\04_switchBox\\switchBox\\SwitchBox_Ver1.0.0\\SwitchBox_TS_Original\\SwitchBoxOriginal\\WPF_SetupApp\\WPF_SetupApp\\WPF_SetupApp.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,8 @@
     "C:\\Users\\Tanko\\.nuget\\packages\\materialdesignthemes\\4.6.1\\materialdesignthemes.4.6.1.nupkg.sha512",
     "C:\\Users\\Tanko\\.nuget\\packages\\materialdesignthemes.mahapps\\0.2.5\\materialdesignthemes.mahapps.0.2.5.nupkg.sha512",
     "C:\\Users\\Tanko\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
-    "C:\\Users\\Tanko\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+    "C:\\Users\\Tanko\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
+    "C:\\Users\\Tanko\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.28\\microsoft.windows.sdk.net.ref.10.0.22621.28.nupkg.sha512"
   ],
   "logs": []
 }

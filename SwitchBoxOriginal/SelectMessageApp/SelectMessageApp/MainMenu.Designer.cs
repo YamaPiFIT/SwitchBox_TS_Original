@@ -38,9 +38,10 @@
             // LOGO
             // 
             this.LOGO.Font = new System.Drawing.Font("UD デジタル 教科書体 NK-B", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.LOGO.Location = new System.Drawing.Point(155, 74);
+            this.LOGO.Location = new System.Drawing.Point(93, 49);
+            this.LOGO.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LOGO.Name = "LOGO";
-            this.LOGO.Size = new System.Drawing.Size(351, 54);
+            this.LOGO.Size = new System.Drawing.Size(212, 38);
             this.LOGO.TabIndex = 2;
             this.LOGO.Text = "ロゴ";
             this.LOGO.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -49,10 +50,9 @@
             // 
             this.MessageAppStartButon.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.MessageAppStartButon.Font = new System.Drawing.Font("UD デジタル 教科書体 NK-B", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MessageAppStartButon.Location = new System.Drawing.Point(77, 500);
-            this.MessageAppStartButon.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.MessageAppStartButon.Location = new System.Drawing.Point(45, 493);
             this.MessageAppStartButon.Name = "MessageAppStartButon";
-            this.MessageAppStartButon.Size = new System.Drawing.Size(527, 78);
+            this.MessageAppStartButon.Size = new System.Drawing.Size(316, 52);
             this.MessageAppStartButon.TabIndex = 3;
             this.MessageAppStartButon.Text = "MessageAppStart";
             this.MessageAppStartButon.UseVisualStyleBackColor = false;
@@ -62,10 +62,9 @@
             // 
             this.SetupButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.SetupButton.Font = new System.Drawing.Font("UD デジタル 教科書体 NK-B", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SetupButton.Location = new System.Drawing.Point(77, 388);
-            this.SetupButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.SetupButton.Location = new System.Drawing.Point(46, 259);
             this.SetupButton.Name = "SetupButton";
-            this.SetupButton.Size = new System.Drawing.Size(527, 78);
+            this.SetupButton.Size = new System.Drawing.Size(316, 52);
             this.SetupButton.TabIndex = 4;
             this.SetupButton.Text = "Setup";
             this.SetupButton.UseVisualStyleBackColor = false;
@@ -75,10 +74,9 @@
             // 
             this.TestButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.TestButton.Font = new System.Drawing.Font("UD デジタル 教科書体 NK-B", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TestButton.Location = new System.Drawing.Point(75, 282);
-            this.TestButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.TestButton.Location = new System.Drawing.Point(45, 188);
             this.TestButton.Name = "TestButton";
-            this.TestButton.Size = new System.Drawing.Size(527, 78);
+            this.TestButton.Size = new System.Drawing.Size(316, 52);
             this.TestButton.TabIndex = 5;
             this.TestButton.Text = "TestButton";
             this.TestButton.UseVisualStyleBackColor = false;
@@ -88,10 +86,9 @@
             // 
             this.PORT.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.PORT.Font = new System.Drawing.Font("UD デジタル 教科書体 NK-B", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PORT.Location = new System.Drawing.Point(77, 167);
-            this.PORT.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.PORT.Location = new System.Drawing.Point(46, 111);
             this.PORT.Name = "PORT";
-            this.PORT.Size = new System.Drawing.Size(527, 78);
+            this.PORT.Size = new System.Drawing.Size(316, 52);
             this.PORT.TabIndex = 6;
             this.PORT.Text = "PORT SETUP";
             this.PORT.UseVisualStyleBackColor = false;
@@ -99,15 +96,16 @@
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(678, 644);
+            this.ClientSize = new System.Drawing.Size(407, 582);
             this.Controls.Add(this.PORT);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.SetupButton);
             this.Controls.Add(this.MessageAppStartButon);
             this.Controls.Add(this.LOGO);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainMenu";
             this.Text = "Setup Menu";
             this.ResumeLayout(false);

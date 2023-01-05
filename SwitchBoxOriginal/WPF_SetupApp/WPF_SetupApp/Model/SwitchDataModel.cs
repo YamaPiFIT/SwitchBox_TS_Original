@@ -11,10 +11,10 @@ namespace WPF_SetupApp.Model
         public string OnTextData { get; set; }
         public string OffTextData { get; set; }
 
-        public SwitchDataModel(string _onTextData, string _offTextData)
+        public SwitchDataModel()
         {
-            OnTextData = _onTextData;
-            OffTextData = _offTextData;
+            OnTextData = "";
+            OffTextData = "";
         }
     }
 }

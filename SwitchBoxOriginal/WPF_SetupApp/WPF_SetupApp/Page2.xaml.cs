@@ -1,7 +1,9 @@
 ﻿using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_SetupApp.Model;
 
 namespace WPF_SetupApp
 {
@@ -25,6 +28,10 @@ namespace WPF_SetupApp
         private const int BUTTON_MODE = 0;
         private const int SWITCH_MODE = 1;
         private const int ROTARY_MODE = 2;
+
+        private ButtonDataModel[] buttonDataModelList = new ButtonDataModel[9];
+        private RotaryDataModel[] rotaryDataModelList = new RotaryDataModel[6];
+        private SwitchDataModel[] switchDataModelList = new SwitchDataModel[4];
 
         public Page2()
         {
@@ -39,6 +46,64 @@ namespace WPF_SetupApp
             ButtonIsIndeterminateState(0);
             SwitchIsIndeterminateState(0);
             RotaryIsIndeterminateState(0);
+            string _text = ReadTextFile();
+
+            for (int i = 0; i < buttonDataModelList.Length; i++)
+            {
+                buttonDataModelList[i] = new ButtonDataModel();
+
+                buttonDataModelList[i].TextData = _text.Substring(0, 10);
+                _text = _text.Remove(0, 10);
+                buttonDataModelList[i].SecData = _text.Substring(0, 1);
+                _text = _text.Remove(0, 1);
+            }
+            for (int i = 0; i < switchDataModelList.Length; i++)
+            {
+                switchDataModelList[i] = new SwitchDataModel();
+
+                switchDataModelList[i].OnTextData = _text.Substring(0, 10);
+                _text = _text.Remove(0, 10);
+                switchDataModelList[i].OffTextData = _text.Substring(0, 10);
+                _text = _text.Remove(0, 10);
+            }
+            for (int i = 0; i < rotaryDataModelList.Length; i++)
+            {
+                rotaryDataModelList[i] = new RotaryDataModel();
+
+                rotaryDataModelList[i].LeftTextData = _text.Substring(0, 10);
+                _text = _text.Remove(0, 10);
+                rotaryDataModelList[i].RightTextData = _text.Substring(0, 10);
+                _text = _text.Remove(0, 10);
+            }
+        }
+
+        private string[] setTextList(string _text, int _length) {
+            string[] array = new string[ _length ];
+
+
+
+            return array;
+        } 
+
+        /// <summary>
+        /// テキストファイルの読み込み 
+        /// </summary>
+        private string ReadTextFile()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "WPF_SetupApp.Data.ToArduino.ToArduino.txt";
+            string manualFileContent = "";
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream != null)
+                {
+                    using (var sr = new StreamReader(stream))
+                    {
+                        manualFileContent = sr.ReadToEnd();
+                    }
+                }
+            }
+            return manualFileContent;
         }
 
         /// <summary>
