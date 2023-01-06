@@ -8,14 +8,14 @@ Joystick_ Joystick;
 */
 const int matrixPinInputNo[] = {2,3,4,5};
 const int matrixPinOutputNo[] = {6,7,8,9,10,11,12};
-const int analogPinInputNo[] ={A0,A1};
+//const int analogPinInputNo[] ={A0,A1};
 
 /*
 　配列のサイズ
 */
 const int matrixPinInputNoSize = sizeof(matrixPinInputNo) / sizeof(int);
 const int matrixPinOutputNoSize = sizeof(matrixPinOutputNo) / sizeof(int);
-const int analogPinInputNoSize = sizeof(analogPinInputNo) / sizeof(int);
+//const int analogPinInputNoSize = sizeof(analogPinInputNo) / sizeof(int);
 const int matrixPinMaxCount = matrixPinInputNoSize + matrixPinOutputNoSize;
 
 /*
@@ -71,19 +71,21 @@ void initialize(){
   }
   
   //analog stick input set
+  /*
   for(int i=0; i < analogPinInputNoSize; i++){
     pinMode(analogPinInputNo[i], INPUT);
   }
+  */
     
   // Set Range Values
   Joystick.setXAxisRange(-1024, 1024);
   Joystick.setYAxisRange(-1024, 1024);
-  Joystick.setZAxisRange(-127, 127);
+  Joystick.setZAxisRange(0, 256);
   Joystick.setRxAxisRange(0, 360);
-  Joystick.setRyAxisRange(360, 0);
+  Joystick.setRyAxisRange(0, 360);
   Joystick.setRzAxisRange(0, 720);
   Joystick.setThrottleRange(0, 255);
-  Joystick.setRudderRange(255, 0);
+  Joystick.setRudderRange(0, 255);
 
   // Initialize Joystick Library
   Joystick.begin();
